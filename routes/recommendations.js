@@ -25,7 +25,7 @@ router.delete('/', jsonParser, function(req, res, next) {
   let rawdata = fs.readFileSync(path.resolve(__dirname, "../data/recommendations.json"));
   let recommendationsArray = JSON.parse(rawdata);
   const newArray = recommendationsArray.filter(x => x.name !== req.body.name)
-  if (newArray.length === recommendationsArray.length == 0 ) {
+  if (newArray.length !== recommendationsArray.length) {
     fs.writeFileSync(path.resolve(__dirname, "../data/recommendations.json"), JSON.stringify(newArray));
   }
   res.end();
